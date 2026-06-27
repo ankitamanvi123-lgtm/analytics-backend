@@ -2,22 +2,21 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+
 import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import dashboardRoutes from "./routes/dashboard.js";
 
 dotenv.config();
 
 const app = express();
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
-const app = express();
 
-app.use(express.json());
-import authRoutes from "./routes/authRoutes.js";
-
+// Routes
 app.use("/api/auth", authRoutes);
-import dashboardRoutes from "./routes/dashboard.js";
-
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/users", userRoutes);
 
@@ -32,7 +31,7 @@ app.get("/", (req, res) => {
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log("Mongo Error:", err));
 
 const PORT = process.env.PORT || 5000;
 
