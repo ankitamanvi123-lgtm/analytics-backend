@@ -10,6 +10,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const express = require("express");
+const app = express();
+
+app.use(express.json());
 import authRoutes from "./routes/authRoutes.js";
 
 app.use("/api/auth", authRoutes);
